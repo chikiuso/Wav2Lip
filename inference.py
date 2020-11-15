@@ -215,7 +215,7 @@ def main():
 
 	if not args.audio.endswith('.wav'):
 		print('Extracting raw audio...')
-		command = 'ffmpeg -y -i {} -strict -2 {}'.format(args.audio, 'temp/temp.wav')
+		command = 'ffmpeg -y -i {}  -c:v libx264 -crf 0 -strict -2 {}'.format(args.audio, 'temp/temp.wav')
 
 		subprocess.call(command, shell=True)
 		args.audio = 'temp/temp.wav'
@@ -272,7 +272,7 @@ def main():
 
 	out.release()
 
-	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(args.audio, 'temp/result.avi', args.outfile)
+	command = 'ffmpeg -y -i {} -i {}  -c:v libx264 -crf 0 -strict -2 -q:v 1 {}'.format(args.audio, 'temp/result.avi', args.outfile)
 	subprocess.call(command, shell=True)
 
 if __name__ == '__main__':
